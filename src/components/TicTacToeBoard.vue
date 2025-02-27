@@ -4,7 +4,16 @@
 
 
 <template>
-  <section>
+  <section class="board">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
       <div class="rounded-pill"></div>
@@ -18,10 +27,13 @@
 
 
 <style lang="scss" scoped>
-section {
+.board {
   aspect-ratio: 1/1;
   height: 65dvh;
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .vertical-lines {
