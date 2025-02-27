@@ -1,19 +1,23 @@
-<script setup>
+<script setup lang="ts">
+import { ref } from "vue";
+
+
+const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
 
 </script>
 
 
 <template>
   <section class="board">
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
       <div class="rounded-pill"></div>
@@ -28,7 +32,7 @@
 
 <style lang="scss" scoped>
 .board {
-  aspect-ratio: 1/1;
+  width: 65dvh;
   height: 65dvh;
   position: relative;
   display: grid;
