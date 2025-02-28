@@ -15,7 +15,7 @@ function handleClick(cellIndex: number) {
 <template>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2">{{ cell }}</p>
+      <p class="text-light display-2 filled-cell">{{ cell }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
@@ -38,6 +38,7 @@ function handleClick(cellIndex: number) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   pointer-events: none;
+  user-select: none;
 }
 
 .cell {
@@ -45,9 +46,11 @@ function handleClick(cellIndex: number) {
   align-items: center;
   justify-content: center;
   pointer-events: auto;
+  cursor: pointer;
 
   p {
     font-weight: bold;
+    user-select: none;
   }
 }
 
