@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+const players = ref(['X', 'O'])
+const currentPlayer = ref(false)
 const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
 
 function handleClick(cellIndex: number) {
-  console.log(`Cell ${cellIndex} is now an X`)
-  board.value.cells[cellIndex] = "X"
+  if (board.value.cells[cellIndex] === "") {
+    const playerSymbol = players.value[Number(currentPlayer.value)]
+    board.value.cells[cellIndex] = playerSymbol
+    currentPlayer.value = !currentPlayer.value
+    console.log(currentPlayer.value, playerSymbol)
+  }
+  return
 }
 
 
