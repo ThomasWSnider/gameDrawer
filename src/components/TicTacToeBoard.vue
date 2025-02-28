@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-
 const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
+
+function handleClick(cellIndex: number) {
+  console.log(`Cell ${cellIndex} is now an X`)
+  board.value.cells[cellIndex] = "X"
+}
+
 
 </script>
 
 
 <template>
   <section class="board">
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
+      <p class="text-light display-2">{{ cell }}</p>
+    </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
       <div class="rounded-pill"></div>
@@ -38,6 +37,18 @@ const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  pointer-events: none;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+
+  p {
+    font-weight: bold;
+  }
 }
 
 .vertical-lines {
