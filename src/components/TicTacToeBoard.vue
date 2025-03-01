@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { Appstate } from "../Appstate";
 
 const players = ref(['X', 'O'])
 const currentPlayer = ref(false)
 const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
 
 function handleClick(cellIndex: number) {
+  const playerSymbol = players.value[Number(currentPlayer.value)]
   if (board.value.cells[cellIndex] === "") {
-    const playerSymbol = players.value[Number(currentPlayer.value)]
     board.value.cells[cellIndex] = playerSymbol
-    currentPlayer.value = !currentPlayer.value
-    console.log(currentPlayer.value, playerSymbol)
   }
+  const winnerIs = checkForWinner(playerSymbol)
+  if (winnerIs) console.log(`${currentPlayer.value} Wins!`)
+  currentPlayer.value = !currentPlayer.value
   return
+}
+
+function checkForWinner(playerSymbol: string) {
+  const winStates = Appstate.ticTacToeWinStates;
+  const gameBoard = board.value.cells;
+  for (const combination of winStates) {
+    const [a, b, c] = combination;
+    if (gameBoard[a] === playerSymbol && gameBoard[b] === playerSymbol && gameBoard[c] === playerSymbol)
+      return true
+  }
+  return false
 }
 
 
