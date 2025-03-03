@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { Appstate } from "../Appstate";
+// @ts-ignore
 import GameStartEndOverlay from "./GameStartEndOverlay.vue";
 
 const players = ref(['X', 'O'])
