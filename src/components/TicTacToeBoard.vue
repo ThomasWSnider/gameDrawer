@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { Appstate } from "../Appstate";
+import GameStartEndOverlay from "./GameStartEndOverlay.vue";
 
 const players = ref(['X', 'O'])
 const currentPlayer = ref(false)
@@ -11,22 +12,18 @@ const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
 
 function handleClick(cellIndex: number) {
   if (currentGameState.value != 0) return
-
   if (board.value.cells[cellIndex] === "") {
     board.value.cells[cellIndex] = playerSymbol.value;
   }
   const winnerIs = checkForWinner(playerSymbol.value);
-
   if (winnerIs) {
     currentGameState.value = 1;
-    console.log(`${currentPlayer.value} Wins!`);
+    console.log(`${playerSymbol.value} Wins!`);
   }
-
   if (!winnerIs && !board.value.cells.includes("")) {
     currentGameState.value = 2
     console.log("It's a Tie!")
   }
-
   currentPlayer.value = !currentPlayer.value;
   return
 }
@@ -59,6 +56,7 @@ function checkForWinner(playerSymbol: string) {
       <div class="rounded-pill"></div>
     </div>
   </section>
+  <GameStartEndOverlay :gameName="`Tic Tac Toe`" v-if="currentGameState != 0" />
 </template>
 
 
