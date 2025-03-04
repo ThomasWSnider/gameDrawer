@@ -6,7 +6,7 @@ const props = defineProps({ gameName: String })
 <template>
   <section>
     <div class="banner-filter"></div>
-    <div class="game-title text-center d-flex justify-content-center align-items-between">
+    <div class="game-title text-center d-flex flex-column justify-content-between">
       <p class="display-3 fw-bold">{{ props.gameName }}</p>
       <p class="display-4 fw-bold">Hello</p>
     </div>
@@ -35,7 +35,7 @@ section {
 .game-title {
   position: relative;
   width: 100dvw;
-  // height: 100dvh;
+  height: 100dvh;
   z-index: 2;
 }
 

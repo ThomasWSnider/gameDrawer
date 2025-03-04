@@ -4,12 +4,10 @@ import { Appstate } from "../Appstate";
 // @ts-ignore
 import GameStartEndOverlay from "./GameStartEndOverlay.vue";
 
-const players = ref(['X', 'O'])
 const currentPlayer = ref(false)
-const playerSymbol = computed(() => players.value[Number(currentPlayer.value)])
-const gameStates = ref([`inProgress`, `${playerSymbol} Wins!`, `It's a Draw!`])
+const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(currentPlayer.value)])
 const currentGameState = ref(0)
-const board = ref({ cells: Array(9).fill("") } as { cells: string[] })
+const board = computed(() => Appstate.ticTacToe.board)
 
 function handleClick(cellIndex: number) {
   if (currentGameState.value != 0) return
@@ -18,19 +16,18 @@ function handleClick(cellIndex: number) {
     const winnerIs = checkForWinner(playerSymbol.value);
     currentPlayer.value = !currentPlayer.value;
     if (winnerIs) {
-      currentGameState.value = 1;
-      console.log(`${playerSymbol.value} Wins!`);
+      if (currentPlayer.value) currentGameState.value = 2;
+      if (!currentPlayer.value) currentGameState.value = 1;
     }
     if (!winnerIs && !board.value.cells.includes("")) {
-      currentGameState.value = 2
-      console.log("It's a Tie!")
+      currentGameState.value = 3;
     }
   }
   return
 }
 
 function checkForWinner(playerSymbol: string) {
-  const winStates = Appstate.ticTacToeWinStates;
+  const winStates = Appstate.ticTacToe.winStates;
   const gameBoard = board.value.cells;
   for (const combination of winStates) {
     const [a, b, c] = combination;
