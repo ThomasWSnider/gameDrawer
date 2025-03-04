@@ -15,17 +15,17 @@ function handleClick(cellIndex: number) {
   if (currentGameState.value != 0) return
   if (board.value.cells[cellIndex] === "") {
     board.value.cells[cellIndex] = playerSymbol.value;
+    const winnerIs = checkForWinner(playerSymbol.value);
+    currentPlayer.value = !currentPlayer.value;
+    if (winnerIs) {
+      currentGameState.value = 1;
+      console.log(`${playerSymbol.value} Wins!`);
+    }
+    if (!winnerIs && !board.value.cells.includes("")) {
+      currentGameState.value = 2
+      console.log("It's a Tie!")
+    }
   }
-  const winnerIs = checkForWinner(playerSymbol.value);
-  if (winnerIs) {
-    currentGameState.value = 1;
-    console.log(`${playerSymbol.value} Wins!`);
-  }
-  if (!winnerIs && !board.value.cells.includes("")) {
-    currentGameState.value = 2
-    console.log("It's a Tie!")
-  }
-  currentPlayer.value = !currentPlayer.value;
   return
 }
 
