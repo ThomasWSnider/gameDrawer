@@ -11,7 +11,9 @@ const currentGameState = ref(0)
 const board = computed(() => Appstate.ticTacToe.board)
 
 function handleClick(cellIndex: number) {
-  if (currentGameState.value != 0) return
+  if (currentGameState.value != 0) {
+    return;
+  }
   if (board.value.cells[cellIndex] === "") {
     const winnerIs = ticTacToeService.fillCell(cellIndex, playerSymbol.value)
     if (winnerIs) {
@@ -22,12 +24,17 @@ function handleClick(cellIndex: number) {
       currentGameState.value = 3;
     }
     else {
-      currentPlayer.value = !currentPlayer.value
+      currentPlayer.value = !currentPlayer.value;
     }
   }
   return
 }
 
+function resetGame() {
+  ticTacToeService.resetGame()
+  currentPlayer.value = false;
+  currentGameState.value = 0;
+}
 
 </script>
 
@@ -46,6 +53,7 @@ function handleClick(cellIndex: number) {
       <div class="rounded-pill"></div>
     </div>
   </section>
+  <button @click="resetGame()" class="btn btn-success">Reset</button>
   <GameStartEndOverlay :gameName="`Tic Tac Toe`" v-if="currentGameState != 0" />
 </template>
 
@@ -99,5 +107,9 @@ function handleClick(cellIndex: number) {
     height: 1.2rem;
     background-color: var(--bs-text);
   }
+}
+
+button {
+  z-index: 5;
 }
 </style>

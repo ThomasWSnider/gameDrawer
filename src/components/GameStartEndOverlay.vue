@@ -1,5 +1,8 @@
 <script setup>
+import { ticTacToeService } from "../services/TicTacToeService";
+
 const props = defineProps({ gameName: String, winningPlayer: String })
+
 </script>
 
 
@@ -8,7 +11,9 @@ const props = defineProps({ gameName: String, winningPlayer: String })
     <div class="banner-filter"></div>
     <div class="game-title text-center d-flex flex-column justify-content-between">
       <p class="display-3 fw-bold">{{ props.gameName }}</p>
-      <p class="display-4 fw-bold">Hello</p>
+      <div>
+        <p class="display-4 fw-bold">Hello</p>
+      </div>
     </div>
   </section>
 </template>

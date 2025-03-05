@@ -19,7 +19,10 @@ class TicTacToeService {
       const winnerIs = this.checkForWinner(playerSymbol)
       return winnerIs
     }
+  }
 
+  resetGame() {
+    Appstate.ticTacToe.board.cells = Array(9).fill("") as string[]
   }
 }
 
