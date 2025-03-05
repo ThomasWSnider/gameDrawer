@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({ gameName: String })
+const props = defineProps({ gameName: String, winningPlayer: String })
 </script>
 
 

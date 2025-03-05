@@ -18,7 +18,5 @@ export const Appstate = reactive({
     ],
     players: ["X", "0"],
     gameStates: [`inProgress`, `X Wins!`, `O Wins!`, `It's a Draw!`]
-
-
   }
 })

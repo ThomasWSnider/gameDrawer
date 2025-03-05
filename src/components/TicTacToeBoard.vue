@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { Appstate } from "../Appstate";
 // @ts-ignore
 import GameStartEndOverlay from "./GameStartEndOverlay.vue";
+import { ticTacToeService } from "../services/TicTacToeService";
 
 const currentPlayer = ref(false)
 const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(currentPlayer.value)])
@@ -12,9 +13,7 @@ const board = computed(() => Appstate.ticTacToe.board)
 function handleClick(cellIndex: number) {
   if (currentGameState.value != 0) return
   if (board.value.cells[cellIndex] === "") {
-    board.value.cells[cellIndex] = playerSymbol.value;
-    const winnerIs = checkForWinner(playerSymbol.value);
-    currentPlayer.value = !currentPlayer.value;
+    const winnerIs = ticTacToeService.fillCell(cellIndex, playerSymbol.value)
     if (winnerIs) {
       if (currentPlayer.value) currentGameState.value = 2;
       if (!currentPlayer.value) currentGameState.value = 1;
@@ -22,18 +21,11 @@ function handleClick(cellIndex: number) {
     if (!winnerIs && !board.value.cells.includes("")) {
       currentGameState.value = 3;
     }
+    else {
+      currentPlayer.value = !currentPlayer.value
+    }
   }
   return
-}
-
-function checkForWinner(playerSymbol: string) {
-  const winStates = Appstate.ticTacToe.winStates;
-  const gameBoard = board.value.cells;
-  for (const combination of winStates) {
-    const [a, b, c] = combination;
-    if (gameBoard[a] === playerSymbol && gameBoard[b] === playerSymbol && gameBoard[c] === playerSymbol) return true;
-  }
-  return false;
 }
 
 

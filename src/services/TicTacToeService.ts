@@ -1,0 +1,26 @@
+import { Appstate } from "../Appstate";
+
+class TicTacToeService {
+
+  checkForWinner(playerSymbol: string) {
+    const winStates = Appstate.ticTacToe.winStates;
+    const gameBoard = Appstate.ticTacToe.board.cells;
+    for (const combination of winStates) {
+      const [a, b, c] = combination;
+      if (gameBoard[a] === playerSymbol && gameBoard[b] === playerSymbol && gameBoard[c] === playerSymbol) return true;
+    }
+    return false;
+  }
+
+  fillCell(cellIndex: number, playerSymbol: string) {
+    const gameBoard = Appstate.ticTacToe.board
+    if (gameBoard.cells[cellIndex] === "") {
+      gameBoard.cells[cellIndex] = playerSymbol;
+      const winnerIs = this.checkForWinner(playerSymbol)
+      return winnerIs
+    }
+
+  }
+}
+
+export const ticTacToeService = new TicTacToeService
