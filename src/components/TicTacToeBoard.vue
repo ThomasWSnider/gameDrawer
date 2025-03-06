@@ -3,8 +3,10 @@ import { computed, ref } from "vue";
 import { Appstate } from "../Appstate";
 // @ts-ignore
 import { ticTacToeService } from "../services/TicTacToeService";
+// @ts-ignore
+import GameStartEndOverlay from "./GameStartEndOverlay.vue";
 
-const currentPlayer = ref(false)
+const currentPlayer = computed(() => Appstate.ticTacToe.currentPlayer)
 const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(currentPlayer.value)])
 const currentGameState = ref(0)
 const board = computed(() => Appstate.ticTacToe.board)
@@ -18,12 +20,14 @@ function handleClick(cellIndex: number) {
     if (winnerIs) {
       if (currentPlayer.value) currentGameState.value = 2;
       if (!currentPlayer.value) currentGameState.value = 1;
+      return
     }
     if (!winnerIs && !board.value.cells.includes("")) {
       currentGameState.value = 3;
+      return
     }
     else {
-      currentPlayer.value = !currentPlayer.value;
+      ticTacToeService.switchPlayer()
     }
   }
   return
@@ -31,7 +35,6 @@ function handleClick(cellIndex: number) {
 
 function resetGame() {
   ticTacToeService.resetGame()
-  currentPlayer.value = false;
   currentGameState.value = 0;
 }
 
@@ -56,6 +59,7 @@ function resetGame() {
   <div class="w-75 text-center">
     <button @click="resetGame()" class="btn btn-outline-text w-100 mt-5 mb-3">Reset</button>
   </div>
+  <GameStartEndOverlay :gameName="`Tic Tac Toe`" :gameResult="currentGameState" v-if="currentGameState != 0" />
 </template>
 
 

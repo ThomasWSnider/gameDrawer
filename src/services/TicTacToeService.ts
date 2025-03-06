@@ -23,6 +23,11 @@ class TicTacToeService {
 
   resetGame() {
     Appstate.ticTacToe.board.cells = Array(9).fill("") as string[]
+    Appstate.ticTacToe.currentPlayer = false
+  }
+
+  switchPlayer() {
+    Appstate.ticTacToe.currentPlayer = !Appstate.ticTacToe.currentPlayer
   }
 }
 
