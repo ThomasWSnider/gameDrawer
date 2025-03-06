@@ -12,19 +12,24 @@ const currentGameState = ref(0)
 const board = computed(() => Appstate.ticTacToe.board)
 
 function handleClick(cellIndex: number) {
+  debugger
   if (currentGameState.value != 0) {
     return;
   }
   if (board.value.cells[cellIndex] === "") {
     const winnerIs = ticTacToeService.fillCell(cellIndex, playerSymbol.value)
     if (winnerIs) {
-      if (currentPlayer.value) currentGameState.value = 2;
-      if (!currentPlayer.value) currentGameState.value = 1;
-      return
+      if (currentPlayer.value) {
+        currentGameState.value = 2;
+        return
+      }
+      if (!currentPlayer.value) {
+        currentGameState.value = 1;
+        return
+      }
     }
     if (!winnerIs && !board.value.cells.includes("")) {
       currentGameState.value = 3;
-      return
     }
     else {
       ticTacToeService.switchPlayer()
