@@ -9,6 +9,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: loadPage('HomePage')
+  },
+  {
+    path: '/tictactoe',
+    name: 'TicTacToe',
+    component: loadPage('TicTacToePage')
   }
 ]
 

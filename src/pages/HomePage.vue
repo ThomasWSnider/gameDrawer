@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import TicTacToeBoard from "../components/TicTacToeBoard.vue";
 
 
 </script>
 
 
 <template>
-  <div class="container-fluid">
-    <TicTacToeBoard />
-  </div>
+  <RouterLink :to="{ name: 'TicTacToe' }">
+    <p>Tic Tac Toe</p>
+  </RouterLink>
 </template>
 
 
-<style lang="scss" scoped>
-div.container-fluid {
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
