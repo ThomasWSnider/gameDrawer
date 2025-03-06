@@ -6,8 +6,14 @@ import TicTacToeBoard from "../components/TicTacToeBoard.vue";
 
 
 <template>
-  <TicTacToeBoard />
+  <div class="container-fluid">
+    <TicTacToeBoard />
+  </div>
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+div.container-fluid {
+  height: 100%;
+}
+</style>

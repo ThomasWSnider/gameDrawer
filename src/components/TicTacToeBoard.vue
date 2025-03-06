@@ -40,21 +40,32 @@ function resetGame() {
 
 
 <template>
-  <section class="board">
-    <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2 filled-cell">{{ cell }}</p>
+  <div class="row h-100">
+    <div class="col-4 d-flex justify-content-center align-items-center">
+
     </div>
-    <div class="vertical-lines justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
+    <div class="col-4 d-flex flex-column justify-content-between align-items-center">
+      <div class="mt-5"></div>
+      <section class="board">
+        <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
+          <p class="text-light display-2 filled-cell">{{ cell }}</p>
+        </div>
+        <div class="vertical-lines justify-content-evenly">
+          <div class="rounded-pill"></div>
+          <div class="rounded-pill"></div>
+        </div>
+        <div class="horizontal-lines flex-column justify-content-evenly">
+          <div class="rounded-pill"></div>
+          <div class="rounded-pill"></div>
+        </div>
+      </section>
+      <div class="w-75 text-center">
+        <button @click="resetGame()" class="btn btn-outline-text w-100 mt-5 mb-3">Reset</button>
+      </div>
     </div>
-    <div class="horizontal-lines flex-column justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
-    </div>
-  </section>
-  <button @click="resetGame()" class="btn btn-success">Reset</button>
-  <GameStartEndOverlay :gameName="`Tic Tac Toe`" v-if="currentGameState != 0" />
+    <div class="col-4 d-flex justify-content-center align-items-center"></div>
+  </div>
+  <GameStartEndOverlay :gameName="`Tic Tac Toe`" :gameResult="currentGameState" v-if="currentGameState != 0" />
 </template>
 
 
@@ -110,6 +121,8 @@ function resetGame() {
 }
 
 button {
+  position: relative;
   z-index: 5;
+
 }
 </style>
