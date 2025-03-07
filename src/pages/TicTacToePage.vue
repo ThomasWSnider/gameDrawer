@@ -10,19 +10,22 @@ const currentPlayer = computed(() => Appstate.ticTacToe.currentPlayer)
 
 
 <template>
-  <div class="container-fluid">
-    <div class="row h-100">
-      <div class="col-4 d-flex justify-content-center align-items-center">
+  <div class="container-fluid d-flex flex-column justify-content-between align-items-center">
+    <div class="row">
+      <div class="col-12">
         <p class="display-1 fw-bold position-absolute top-0 start-0 ms-5"
-          :class="{ 'active-player': currentPlayer == false }">X
+          :class="{ 'active-player': currentPlayer === false }">
+          X
+        </p>
+        <p class="display-1 fw-bold position-absolute top-0 end-0 me-5"
+          :class="{ 'active-player': currentPlayer === true }">
+          O
         </p>
       </div>
+    </div>
+    <div class="row w-100 justify-content-center">
       <div class="col-4 d-flex flex-column justify-content-between align-items-center">
         <TicTacToeBoard />
-      </div>
-      <div class="col-4 d-flex justify-content-center align-items-center">
-        <p class="display-1 fw-bold position-absolute top-0 end-0 me-5"
-          :class="{ 'active-player': currentPlayer == true }">O</p>
       </div>
     </div>
   </div>
@@ -36,5 +39,12 @@ div.container-fluid {
 
 .active-player {
   color: var(--bs-text);
+  opacity: 75%;
+  transition: color .33s ease-in-out;
+}
+
+p {
+  user-select: none;
+
 }
 </style>
