@@ -10,9 +10,11 @@ const currentPlayer = computed(() => Appstate.ticTacToe.currentPlayer)
 const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(currentPlayer.value)])
 const currentGameState = ref(0)
 const board = computed(() => Appstate.ticTacToe.board)
+const boardSettled = ref(false)
 
 function handleClick(cellIndex: number) {
-  debugger
+  boardSettled.value = true
+  setTimeout(() => boardSettled.value = false, 333)
   if (currentGameState.value != 0) {
     return;
   }
@@ -50,7 +52,7 @@ function resetGame() {
   <div class="mt-5"></div>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2 filled-cell">{{ cell }}</p>
+      <p class="text-light display-2" :class="{ 'filled-in': cell != '' }">{{ cell }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
@@ -90,6 +92,12 @@ function resetGame() {
   p {
     font-weight: bold;
     user-select: none;
+    opacity: 0;
+    transition: opacity .33s ease-in;
+
+    &.filled-in {
+      opacity: 1;
+    }
   }
 }
 
