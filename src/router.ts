@@ -14,6 +14,11 @@ const routes = [
     path: '/tictactoe',
     name: 'TicTacToe',
     component: loadPage('TicTacToePage')
+  },
+  {
+    path: '/ultimatetictactoe',
+    name: 'UltimateTicTacToe',
+    component: loadPage('UltimateTicTacToePage')
   }
 ]
 

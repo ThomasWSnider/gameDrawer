@@ -52,7 +52,7 @@ function resetGame() {
   <div class="mt-5"></div>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2" :class="{ 'filled-in': cell != '' }">{{ cell }}</p>
+      <p class="text-light display-2 mogra-regular" :class="{ 'filled-in': cell != '' }">{{ cell }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>

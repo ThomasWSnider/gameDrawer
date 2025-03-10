@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import 'bootstrap'
 import './assets/scss/main.scss'
+import '@mdi/font/css/materialdesignicons.css'
 import App from './App.vue'
 import { router } from './router'
 
