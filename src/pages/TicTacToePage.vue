@@ -16,13 +16,11 @@ onUnmounted(() => {
 
 <template>
   <div class="row">
-    <div class="col-12">
-      <p class="display-1 fw-bold position-absolute top-0 start-0 ms-5"
-        :class="{ 'active-player': currentPlayer === false }">
+    <div class="col-12 d-flex justify-content-between position-absolute top-0">
+      <p class="display-1 fw-bold ms-3 mb-0" :class="{ 'active-player': currentPlayer === false }">
         X
       </p>
-      <p class="display-1 fw-bold position-absolute top-0 end-0 me-5"
-        :class="{ 'active-player': currentPlayer === true }">
+      <p class="display-1 fw-bold me-3 mb-0" :class="{ 'active-player': currentPlayer === true }">
         O
       </p>
     </div>
