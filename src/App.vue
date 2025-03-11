@@ -30,5 +30,6 @@ main {
   position: fixed;
   bottom: 8px;
   left: 8px;
+  z-index: 5;
 }
 </style>

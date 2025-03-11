@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import { Appstate } from "../Appstate";
+import { ticTacToeService } from "../services/TicTacToeService";
+
+
+onMounted(() => {
+  if (Appstate.ticTacToe.board.cells != Array(9).fill("")) ticTacToeService.resetGame()
+})
 
 
 </script>
