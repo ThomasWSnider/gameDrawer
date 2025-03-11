@@ -37,12 +37,13 @@ div.container-fluid {
 
 .active-player {
   color: var(--bs-text);
-  opacity: 75%;
-  transition: color .33s ease-in;
+  opacity: 100%;
+  transition: all .33s ease-in;
 }
 
 p {
   user-select: none;
-
+  opacity: 25%;
+  transition: all .33s ease-in;
 }
 </style>

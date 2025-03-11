@@ -11,6 +11,7 @@ const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(currentPla
 const currentGameState = ref(0)
 const board = computed(() => Appstate.ticTacToe.board)
 const boardSettled = ref(false)
+const cellReset = ref(false)
 
 function handleClick(cellIndex: number) {
   boardSettled.value = true
@@ -41,8 +42,14 @@ function handleClick(cellIndex: number) {
 }
 
 function resetGame() {
-  ticTacToeService.resetGame()
+  boardSettled.value = true;
+  cellReset.value = true;
   currentGameState.value = 0;
+  setTimeout(() => {
+    cellReset.value = false
+    ticTacToeService.resetGame()
+    boardSettled.value = false;
+  }, 333)
 }
 
 </script>
@@ -52,7 +59,8 @@ function resetGame() {
   <div class="mt-5"></div>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2 mogra-regular" :class="{ 'filled-in': cell != '' }">{{ cell }}</p>
+      <p class="text-light display-2 mogra-regular" :class="{ 'filled-in': cell != '' && cellReset === false }">{{ cell
+      }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
@@ -66,7 +74,9 @@ function resetGame() {
   <div class="w-75 text-center">
     <button @click="resetGame()" class="btn btn-outline-text w-100 mt-5 mb-3">Reset</button>
   </div>
-  <GameStartEndOverlay :gameName="`Tic Tac Toe`" :gameResult="currentGameState" v-if="currentGameState != 0" />
+  <Transition>
+    <GameStartEndOverlay :gameName="`Tic Tac Toe`" :gameResult="currentGameState" v-if="currentGameState != 0" />
+  </Transition>
 </template>
 
 
@@ -93,7 +103,7 @@ function resetGame() {
     font-weight: bold;
     user-select: none;
     opacity: 0;
-    transition: opacity .33s ease-in;
+    transition: all .33s ease-in;
 
     &.filled-in {
       opacity: 1;
@@ -125,6 +135,16 @@ function resetGame() {
     height: 1.2rem;
     background-color: var(--bs-text);
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 
 button {
