@@ -3,7 +3,7 @@ import { Appstate } from "../Appstate";
 class TicTacToeService {
 
   checkForWinner(playerSymbol: string) {
-    const winStates = Appstate.ticTacToe.winStates;
+    const winStates = Appstate.ticTacToeWinStates;
     const gameBoard = Appstate.ticTacToe.board.cells;
     for (const combination of winStates) {
       const [a, b, c] = combination;
