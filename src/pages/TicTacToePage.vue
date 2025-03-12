@@ -15,8 +15,8 @@ onUnmounted(() => {
 
 
 <template>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-between position-absolute top-0">
+  <div class="row justify-content-center position-relative">
+    <div class="col-12 d-flex justify-content-between position-absolute top-0 mb">
       <p class="display-1 fw-bold ms-3 mb-0" :class="{ 'active-player': currentPlayer === false }">
         X
       </p>
@@ -24,9 +24,7 @@ onUnmounted(() => {
         O
       </p>
     </div>
-  </div>
-  <div class="row w-100 justify-content-center">
-    <div class="col-4 d-flex flex-column justify-content-between align-items-center">
+    <div class="col-4 d-flex flex-column justify-content-between align-items-center mt-5">
       <TicTacToeBoard />
     </div>
   </div>

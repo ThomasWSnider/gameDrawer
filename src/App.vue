@@ -15,7 +15,7 @@ function sendToHome() {
   <main>
     <router-view v-slot="{ Component }">
       <Transition name="fade" mode="out-in">
-        <div class="container-fluid w-100" :key="route.path">
+        <div class="container-fluid w-100 h-100" :key="route.path">
           <component :is="Component" />
         </div>
       </Transition>
@@ -31,6 +31,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .home-btn {
@@ -46,12 +47,12 @@ main {
 }
 
 .fade-enter-from {
-  transform: translateY(-15px);
+  transform: translateY(-25px);
   opacity: 0;
 }
 
 .fade-leave-to {
-  transform: translateY(15px);
+  transform: translateY(25px);
   opacity: 0;
 }
 </style>

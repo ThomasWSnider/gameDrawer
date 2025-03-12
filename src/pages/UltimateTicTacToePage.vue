@@ -4,16 +4,20 @@
 
 
 <template>
-  <section class="board">
-    <div class="vertical-lines justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 d-flex justify-content-center align-items-center">
+      <section class="board">
+        <div class="vertical-lines justify-content-evenly">
+          <div class="rounded-pill"></div>
+          <div class="rounded-pill"></div>
+        </div>
+        <div class="horizontal-lines flex-column justify-content-evenly">
+          <div class="rounded-pill"></div>
+          <div class="rounded-pill"></div>
+        </div>
+      </section>
     </div>
-    <div class="horizontal-lines flex-column justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
-    </div>
-  </section>
+  </div>
 </template>
 
 

@@ -13,7 +13,7 @@ onMounted(() => {
 
 
 <template>
-  <div class="row w-100 justify-content-center">
+  <div class="row h-100 justify-content-center justify-content-center align-items-center">
     <div class="col-2 text-center">
       <RouterLink :to="{ name: 'TicTacToe' }">
         <p>Tic Tac Toe</p>
