@@ -56,7 +56,6 @@ function resetGame() {
 
 
 <template>
-  <div class="mt-5"></div>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
       <p class="text-light display-2 mogra-regular" :class="{ 'filled-in': cell != '' && cellReset === false }">{{ cell

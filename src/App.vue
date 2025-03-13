@@ -21,8 +21,11 @@ function sendToHome() {
       </Transition>
     </router-view>
   </main>
-  <button v-if="route.name != 'Home'" @click="sendToHome()" class="home-btn btn btn-outline-text rounded"><i
-      class="mdi mdi-home m-0 p-0"></i></button>
+  <Transition name="fade" mode="out-in">
+    <button v-if="route.name != 'Home'" @click="sendToHome()" class="home-btn btn btn-outline-text rounded"><i
+        class="mdi mdi-home m-0 p-0"></i></button>
+    <div v-else class="home-btn empty-div"></div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -39,6 +42,12 @@ main {
   bottom: 8px;
   left: 8px;
   z-index: 5;
+
+  &.empty-div {
+    aspect-ratio: 1/1;
+    height: 38px;
+    background-color: var(--bs-page);
+  }
 }
 
 .fade-enter-active,
