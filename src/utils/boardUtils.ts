@@ -1,8 +1,7 @@
 
-export function setUpUTTTBoard(): { localCells: string[], filled: boolean, victor: '' | 'X' | 'O' | '-' } {
+export function setUpUTTTBoard(): { localCells: string[], value: '' | 'X' | 'O' | '-' } {
   return {
     localCells: Array(9).fill(""),
-    filled: false,
-    victor: ''
+    value: ""
   }
 }

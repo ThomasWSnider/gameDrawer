@@ -71,8 +71,8 @@ function resetGame() {
       <div class="rounded-pill"></div>
     </div>
   </section>
-  <div class="w-75 text-center">
-    <button @click="resetGame()" class="btn btn-outline-text w-100 mt-5 mb-3">Reset</button>
+  <div class="reset-btn text-center">
+    <button @click="resetGame()" class="btn btn-outline-text">Reset</button>
   </div>
   <Transition>
     <GameStartEndOverlay :gameName="`Tic Tac Toe`" :gameResult="currentGameState" v-if="currentGameState != 0" />
@@ -82,8 +82,8 @@ function resetGame() {
 
 <style lang="scss" scoped>
 .board {
-  width: 65dvh;
-  height: 65dvh;
+  width: 90dvh;
+  height: 90dvh;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -118,7 +118,7 @@ function resetGame() {
   display: flex;
 
   div {
-    height: 65dvh;
+    height: 90dvh;
     width: 1.2rem;
     background-color: var(--bs-text);
   }
@@ -131,7 +131,7 @@ function resetGame() {
   display: flex;
 
   div {
-    width: 65dvh;
+    width: 90dvh;
     height: 1.2rem;
     background-color: var(--bs-text);
   }
@@ -147,8 +147,16 @@ function resetGame() {
   opacity: 0;
 }
 
-button {
-  position: relative;
+.reset-btn {
+  position: fixed;
+  bottom: 8px;
+  left: 65px;
+  height: 38.18px;
+  width: 12rem;
   z-index: 5;
+
+  button {
+    width: 100%;
+  }
 }
 </style>

@@ -24,7 +24,7 @@ onUnmounted(() => {
         O
       </p>
     </div>
-    <div class="col-4 d-flex flex-column justify-content-between align-items-center mt-5">
+    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
       <TicTacToeBoard />
     </div>
   </div>
