@@ -1,7 +1,8 @@
 import { reactive } from "vue";
-import { setUpUTTTBoard } from "./utils/boardUtils";
+import { GlobalCell } from "./models/GlobalCell";
+import type { AppState } from "./types/types";
 
-export const Appstate = reactive({
+export const Appstate = reactive<AppState>({
   ticTacToeWinStates: [
     // Horizontal winstates
     [0, 1, 2],
@@ -22,10 +23,10 @@ export const Appstate = reactive({
     gameStates: [`inProgress`, `X Wins!`, `O Wins!`, `It's a Draw!`]
   },
   ultimateTTT: {
-    board: { globalCells: Array(9).fill(setUpUTTTBoard()) },
+    board: { globalCells: Array(9).fill(null).map(() => new GlobalCell) },
     activeGlobalCell: null,
     players: ["X", "O"],
     currentPlayer: false,
-    gameStates: [`notBegun`, `X Wins!`, `O Wins!`, `It's a Draw!`]
+    gameStates: [`newGame`, `X Wins!`, `O Wins!`, `It's a Draw!`]
   }
 })

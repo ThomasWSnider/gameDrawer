@@ -1,21 +1,22 @@
 <script setup>
+import UTTTBoard from "../components/UTTTBoard.vue";
+
 
 </script>
 
 
 <template>
-  <div class="row h-100 justify-content-center">
-    <div class="col-8 d-flex justify-content-center align-items-center">
-      <section class="board">
-        <div class="vertical-lines justify-content-evenly">
-          <div class="rounded-pill"></div>
-          <div class="rounded-pill"></div>
-        </div>
-        <div class="horizontal-lines flex-column justify-content-evenly">
-          <div class="rounded-pill"></div>
-          <div class="rounded-pill"></div>
-        </div>
-      </section>
+  <div class="row justify-content-center position-relative h-100">
+    <div class="col-12 d-flex justify-content-between position-absolute top-0 mb">
+      <p class="display-1 fw-bold ms-3 mb-0" :class="{ 'active-player': currentPlayer === false }">
+        X
+      </p>
+      <p class="display-1 fw-bold me-3 mb-0" :class="{ 'active-player': currentPlayer === true }">
+        O
+      </p>
+    </div>
+    <div class="col-4 d-flex flex-column justify-content-center align-items-center h-100">
+      <UTTTBoard />
     </div>
   </div>
 </template>
