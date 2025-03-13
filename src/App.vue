@@ -21,13 +21,13 @@ function sendToHome() {
       </Transition>
     </router-view>
   </main>
-  <button v-if="route.name != 'Home'" @click="sendToHome()" class="home-btn btn btn-outline-primary rounded"><i
+  <button v-if="route.name != 'Home'" @click="sendToHome()" class="home-btn btn btn-outline-text rounded"><i
       class="mdi mdi-home m-0 p-0"></i></button>
 </template>
 
 <style scoped>
 main {
-  height: 100%;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
