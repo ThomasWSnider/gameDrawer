@@ -1,17 +1,22 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { GlobalCell } from "../models/GlobalCell";
 import { Appstate } from "../Appstate";
 
 
-defineProps({ globalCell: GlobalCell, index: Number })
+defineProps({ globalCell: GlobalCell, globalCellIndex: Number })
 const board = computed(() => Appstate.ultimateTTT.board)
+
+onMounted(() => {
+  console.log(Appstate.ultimateTTT.activeGlobalCell)
+})
 
 </script>
 
 
 <template>
-  <section class="global-cell" :class="{ 'invalid-cell': globalCell != '' }">
+  <section class="global-cell">
+    <div v-if="Appstate.ultimateTTT.activeGlobalCell != globalCellIndex || null" class="invalid-cell"></div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
       <div class="rounded-pill"></div>
@@ -60,5 +65,16 @@ const board = computed(() => Appstate.ultimateTTT.board)
     height: 0.3rem;
     background-color: var(--bs-text);
   }
+}
+
+.invalid-cell {
+  height: 29dvh;
+  width: 29dvh;
+  position: absolute;
+  top: -13.5%;
+  left: -13.5%;
+  background-color: var(--bs-page);
+  opacity: 85%;
+  z-index: 3;
 }
 </style>

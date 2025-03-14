@@ -10,7 +10,7 @@ export interface ticTacToe {
 
 export interface ultimateTTT {
   board: { globalCells: GlobalCell[] };
-  activeGlobalCell: null | number;
+  activeGlobalCell: number | null;
   players: string[];
   currentPlayer: boolean;
   gameStates: string[];

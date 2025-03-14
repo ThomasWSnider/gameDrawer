@@ -15,7 +15,7 @@ import UTTTBoard from "../components/UTTTBoard.vue";
         O
       </p>
     </div>
-    <div class="col-4 d-flex flex-column justify-content-center align-items-center h-100">
+    <div class="col-12 d-flex flex-column justify-content-center align-items-center h-100">
       <UTTTBoard />
     </div>
   </div>

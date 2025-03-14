@@ -11,9 +11,9 @@ const board = computed(() => Appstate.ultimateTTT.board)
 
 <template>
   <section class="board">
-    <div v-for="{ globalCell, index } in board.globalCells" :key="index"
+    <div v-for="(globalCell, index) in board.globalCells" :key="index"
       class="d-flex justify-content-center align-items-center">
-      <UTTTLocalCell :globalCell="globalCell" :index="index" />
+      <UTTTLocalCell :globalCell="globalCell" :globalCellIndex="index" />
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
@@ -44,6 +44,8 @@ const board = computed(() => Appstate.ultimateTTT.board)
   height: 100%;
   width: 100%;
   display: flex;
+  z-index: 4;
+
 
   div {
     height: 90dvh;
@@ -57,6 +59,8 @@ const board = computed(() => Appstate.ultimateTTT.board)
   height: 100%;
   width: 100%;
   display: flex;
+  z-index: 4;
+
 
   div {
     width: 90dvh;
