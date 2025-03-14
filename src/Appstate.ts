@@ -24,7 +24,7 @@ export const Appstate = reactive<AppState>({
   },
   ultimateTTT: {
     board: { globalCells: Array(9).fill(null).map(() => new GlobalCell) },
-    activeGlobalCell: 1,
+    activeGlobalCell: null,
     players: ["X", "O"],
     currentPlayer: false,
     gameStates: [`newGame`, `X Wins!`, `O Wins!`, `It's a Draw!`]

@@ -6,6 +6,7 @@ import { Appstate } from "../Appstate";
 
 defineProps({ globalCell: GlobalCell, globalCellIndex: Number })
 const board = computed(() => Appstate.ultimateTTT.board)
+const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell)
 
 onMounted(() => {
   console.log(Appstate.ultimateTTT.activeGlobalCell)
@@ -15,7 +16,8 @@ onMounted(() => {
 
 
 <template>
-  <section class="global-cell">
+  <section class="global-cell"
+    :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
     <div v-if="Appstate.ultimateTTT.activeGlobalCell != globalCellIndex || null" class="invalid-cell"></div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
@@ -39,6 +41,10 @@ onMounted(() => {
   grid-template-rows: repeat(3, 1fr);
   pointer-events: none;
   user-select: none;
+
+  &.invalid-cell {
+    opacity: 25%;
+  }
 }
 
 .vertical-lines {
@@ -65,16 +71,5 @@ onMounted(() => {
     height: 0.3rem;
     background-color: var(--bs-text);
   }
-}
-
-.invalid-cell {
-  height: 29dvh;
-  width: 29dvh;
-  position: absolute;
-  top: -13.5%;
-  left: -13.5%;
-  background-color: var(--bs-page);
-  opacity: 85%;
-  z-index: 3;
 }
 </style>
