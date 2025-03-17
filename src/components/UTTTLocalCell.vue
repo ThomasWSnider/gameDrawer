@@ -8,17 +8,16 @@ defineProps({ globalCell: GlobalCell, globalCellIndex: Number })
 const board = computed(() => Appstate.ultimateTTT.board)
 const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell)
 
-onMounted(() => {
-  console.log(Appstate.ultimateTTT.activeGlobalCell)
-})
-
 </script>
 
 
 <template>
   <section class="global-cell"
     :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
-    <div v-if="Appstate.ultimateTTT.activeGlobalCell != globalCellIndex || null" class="invalid-cell"></div>
+    <div @click="console.log(`You clicked on local cell ${index} on global cell ${globalCellIndex}`)"
+      v-for="(cell, index) in globalCell.localCells" :key="index" class="local-cell">
+
+    </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
       <div class="rounded-pill"></div>
@@ -45,6 +44,11 @@ onMounted(() => {
   &.invalid-cell {
     opacity: 25%;
   }
+}
+
+.local-cell {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .vertical-lines {
