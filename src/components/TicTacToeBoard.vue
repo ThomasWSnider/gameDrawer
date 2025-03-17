@@ -58,7 +58,13 @@ function resetGame() {
 <template>
   <section class="board">
     <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
-      <p class="text-light display-2 mogra-regular" :class="{ 'filled-in': cell != '' && cellReset === false }">{{ cell
+      <div class="cell-indicator d-flex justify-content-center align-items-center">
+        <p class="display-2 text-light" :class="{ 'd-none': cell != '' }">{{ playerSymbol
+        }}
+        </p>
+      </div>
+      <p class="text-light display-2" :class="{ 'filled-in': cell != '' && cellReset === false }">{{
+        cell
       }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
@@ -96,13 +102,37 @@ function resetGame() {
   align-items: center;
   justify-content: center;
   pointer-events: auto;
+  position: relative;
   cursor: pointer;
+
+  .cell-indicator {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+
+    p {
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    .cell-indicator {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+
+      p {
+        opacity: 0.2;
+      }
+    }
+  }
 
   p {
     font-weight: bold;
     user-select: none;
-    opacity: 0;
-    transition: all .33s ease-in;
+    opacity: 0.2;
+    transition: opacity .33s ease-in;
 
     &.filled-in {
       opacity: 1;

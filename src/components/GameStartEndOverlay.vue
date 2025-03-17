@@ -35,7 +35,7 @@ section {
     left: 0%;
     height: 100dvh;
     width: 100dvw;
-    z-index: 1;
+    z-index: 2;
   }
 }
 
@@ -43,7 +43,7 @@ section {
   position: relative;
   width: 100dvw;
   height: 100dvh;
-  z-index: 2;
+  z-index: 3;
 }
 
 p {
