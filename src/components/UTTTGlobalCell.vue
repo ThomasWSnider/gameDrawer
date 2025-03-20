@@ -15,8 +15,9 @@ const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell)
   <section class="global-cell"
     :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
     <div @click="console.log(`You clicked on local cell ${index} on global cell ${globalCellIndex}`)"
-      v-for="(cell, index) in globalCell.localCells" :key="index" class="local-cell">
-
+      v-for="(cell, index) in globalCell.localCells" :key="index"
+      class="local-cell d-flex justify-content-center align-items-center">
+      <p class="m-0">{{ cell }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>

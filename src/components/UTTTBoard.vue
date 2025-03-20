@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import { Appstate } from "../Appstate";
-import UTTTLocalCell from "./UTTTLocalCell.vue";
+import UTTTGlobalCell from "./UTTTGlobalCell.vue";
 
 
 const board = computed(() => Appstate.ultimateTTT.board)
@@ -13,7 +13,7 @@ const board = computed(() => Appstate.ultimateTTT.board)
   <section class="board">
     <div v-for="(globalCell, index) in board.globalCells" :key="index"
       class="d-flex justify-content-center align-items-center">
-      <UTTTLocalCell :globalCell="globalCell" :globalCellIndex="index" />
+      <UTTTGlobalCell :globalCell="globalCell" :globalCellIndex="index" />
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
