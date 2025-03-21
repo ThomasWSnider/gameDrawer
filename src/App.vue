@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Transition } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
