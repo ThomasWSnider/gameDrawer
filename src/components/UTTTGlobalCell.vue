@@ -15,11 +15,8 @@ const boardSettled = ref(false)
 const cellReset = ref(false)
 
 function fillLocalCell(index: number) {
-  if (localBoard.value[index] === '' && (activeGlobalCell.value === props.globalCellIndex || activeGlobalCell.value === null)) {
-    uTTTService.fillCell(props.globalCellIndex, index)
-    uTTTService.setGlobalCell(index);
-    console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`);
-  }
+  uTTTService.fillCell(props.globalCellIndex, index);
+  console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`);
   return;
 }
 
@@ -31,7 +28,7 @@ function fillLocalCell(index: number) {
     :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
     <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
       class="local-cell d-flex justify-content-center align-items-center">
-      <p class="m-0 text-center">{{ cell }}</p>
+      <p class="m-0 text-center fs-2">{{ cell }}</p>
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>
