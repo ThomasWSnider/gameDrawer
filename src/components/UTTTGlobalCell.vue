@@ -4,11 +4,14 @@ import { GlobalCell } from "../models/GlobalCell";
 import { Appstate } from "../Appstate";
 
 
-defineProps({ globalCell: GlobalCell, globalCellIndex: Number })
-const board = computed(() => Appstate.ultimateTTT.board)
+const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number }>();
+const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells)
+const globalBoard = computed(() => Appstate.ultimateTTT.board)
 const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell)
 
 function fillLocalCell(index: number) {
+
+  console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`)
   return
 }
 
@@ -18,8 +21,7 @@ function fillLocalCell(index: number) {
 <template>
   <section class="global-cell"
     :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
-    <div @click="console.log(`You clicked on local cell ${index} on global cell ${globalCellIndex}`)"
-      v-for="(cell, index) in globalCell?.localCells" :key="index"
+    <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
       class="local-cell d-flex justify-content-center align-items-center">
       <p class="m-0 text-center">{{ cell }}</p>
     </div>
