@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { GlobalCell } from "../models/GlobalCell";
 import { Appstate } from "../Appstate";
+import { uTTTService } from "../services/UTTTService";
 
 
 const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number }>();
-const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells)
-const globalBoard = computed(() => Appstate.ultimateTTT.board)
-const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell)
+const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
+const globalBoard = computed(() => Appstate.ultimateTTT.board);
+const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
+const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(Appstate.ultimateTTT.currentPlayer)])
+const currentGameState = ref(0)
+const boardSettled = ref(false)
+const cellReset = ref(false)
 
 function fillLocalCell(index: number) {
-
-  console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`)
-  return
+  if (localBoard.value[index] === '' && (activeGlobalCell.value === props.globalCellIndex || activeGlobalCell.value === null)) {
+    uTTTService.fillCell(props.globalCellIndex, index)
+    uTTTService.setGlobalCell(index);
+    console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`);
+  }
+  return;
 }
 
 </script>

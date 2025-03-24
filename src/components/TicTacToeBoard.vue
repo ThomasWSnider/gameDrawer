@@ -11,7 +11,7 @@ const board = computed(() => Appstate.ticTacToe.board)
 const boardSettled = ref(false)
 const cellReset = ref(false)
 
-function handleClick(cellIndex: number) {
+function fillCell(cellIndex: number) {
   boardSettled.value = true
   setTimeout(() => boardSettled.value = false, 333)
   if (currentGameState.value != 0) {
@@ -55,7 +55,7 @@ function resetGame() {
 
 <template>
   <section class="board">
-    <div @click="handleClick(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
+    <div @click="fillCell(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
       <div class="cell-indicator d-flex justify-content-center align-items-center">
         <p class="display-2 text-light" :class="{ 'd-none': cell != '' }">{{ playerSymbol
         }}
