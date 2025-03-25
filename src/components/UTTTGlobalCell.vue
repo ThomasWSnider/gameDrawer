@@ -25,7 +25,13 @@ function fillLocalCell(index: number) {
 
 <template>
   <section class="global-cell"
-    :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell != null }">
+    :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell || activeGlobalCell === null }">
+
+    <div class="d-flex justify-content-center align-items-center global-cell-indicator">
+      <p class="fw-semibold" :class="{ 'd-none': globalBoard.globalCells[props.globalCellIndex].value == '' }">{{
+        globalBoard.globalCells[props.globalCellIndex].value }}</p>
+    </div>
+
     <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
       class="local-cell d-flex justify-content-center align-items-center">
       <p class="m-0 text-center fs-2">{{ cell }}</p>
@@ -55,6 +61,18 @@ function fillLocalCell(index: number) {
 
   &.invalid-cell {
     opacity: 25%;
+  }
+}
+
+.global-cell-indicator {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  z-index: 3;
+
+  p {
+    font-size: 9.75rem;
   }
 }
 
