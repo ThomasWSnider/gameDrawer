@@ -31,11 +31,13 @@ function fillLocalCell(index: number) {
         globalBoard.globalCells[props.globalCellIndex].value }}</p>
     </div>
     <div class="local-board"
-      :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell !== null }">
+      :class="{ 'invalid-cell': (globalCellIndex != activeGlobalCell && activeGlobalCell !== null) || globalBoard.globalCells[globalCellIndex].value !== '' }">
+
       <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
         class="local-cell d-flex justify-content-center align-items-center">
         <p class="m-0 text-center fs-2">{{ cell }}</p>
       </div>
+
       <div class="vertical-lines justify-content-evenly">
         <div class="rounded-pill"></div>
         <div class="rounded-pill"></div>
