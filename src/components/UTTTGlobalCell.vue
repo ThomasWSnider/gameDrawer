@@ -6,13 +6,13 @@ import { uTTTService } from "../services/UTTTService";
 
 
 const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number }>();
-const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
+// const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
 const globalBoard = computed(() => Appstate.ultimateTTT.board);
 const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
-const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(Appstate.ultimateTTT.currentPlayer)])
-const currentGameState = ref(0)
-const boardSettled = ref(false)
-const cellReset = ref(false)
+// const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(Appstate.ultimateTTT.currentPlayer)])
+// const currentGameState = ref(0)
+// const boardSettled = ref(false)
+// const cellReset = ref(false)
 
 function fillLocalCell(index: number) {
   uTTTService.fillCell(props.globalCellIndex, index);
@@ -24,25 +24,26 @@ function fillLocalCell(index: number) {
 
 
 <template>
-  <section class="global-cell"
-    :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell || activeGlobalCell === null }">
+  <section class="global-cell">
 
     <div class="d-flex justify-content-center align-items-center global-cell-indicator">
       <p class="fw-semibold" :class="{ 'd-none': globalBoard.globalCells[props.globalCellIndex].value == '' }">{{
         globalBoard.globalCells[props.globalCellIndex].value }}</p>
     </div>
-
-    <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
-      class="local-cell d-flex justify-content-center align-items-center">
-      <p class="m-0 text-center fs-2">{{ cell }}</p>
-    </div>
-    <div class="vertical-lines justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
-    </div>
-    <div class="horizontal-lines flex-column justify-content-evenly">
-      <div class="rounded-pill"></div>
-      <div class="rounded-pill"></div>
+    <div class="local-board"
+      :class="{ 'invalid-cell': globalCellIndex != activeGlobalCell && activeGlobalCell !== null }">
+      <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
+        class="local-cell d-flex justify-content-center align-items-center">
+        <p class="m-0 text-center fs-2">{{ cell }}</p>
+      </div>
+      <div class="vertical-lines justify-content-evenly">
+        <div class="rounded-pill"></div>
+        <div class="rounded-pill"></div>
+      </div>
+      <div class="horizontal-lines flex-column justify-content-evenly">
+        <div class="rounded-pill"></div>
+        <div class="rounded-pill"></div>
+      </div>
     </div>
   </section>
 </template>
@@ -53,15 +54,9 @@ function fillLocalCell(index: number) {
   width: 23dvh;
   height: 23dvh;
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   pointer-events: none;
   user-select: none;
 
-  &.invalid-cell {
-    opacity: 25%;
-  }
 }
 
 .global-cell-indicator {
@@ -79,6 +74,22 @@ function fillLocalCell(index: number) {
 .local-cell {
   pointer-events: auto;
   cursor: pointer;
+}
+
+.local-board {
+  width: 23dvh;
+  height: 23dvh;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  pointer-events: none;
+  user-select: none;
+
+
+  &.invalid-cell {
+    opacity: 0.25;
+  }
 }
 
 .vertical-lines {
