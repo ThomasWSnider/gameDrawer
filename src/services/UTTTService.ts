@@ -10,10 +10,7 @@ class UTTTService {
     if (board.globalCells[globalCellIndex].localCells[localCellIndex] === '' && (activeGlobalCell === globalCellIndex || activeGlobalCell === null) && board.globalCells[globalCellIndex].value === '') {
       // set the value to the same value as the current player
       board.globalCells[globalCellIndex].localCells[localCellIndex] = playerSymbol;
-      const localCellWinner = this.checkForLocalWinner(globalCellIndex);
-      if (localCellWinner) {
-        board.globalCells[globalCellIndex].value = playerSymbol;
-      }
+      this.checkForLocalWinner(globalCellIndex);
       // set active global cell
       this.setActiveGlobalCell(localCellIndex);
       // switch the players
@@ -47,14 +44,14 @@ class UTTTService {
       const [a, b, c] = combination;
       if (globalCell.localCells[a] === playerSymbol && globalCell.localCells[b] === playerSymbol && globalCell.localCells[c] === playerSymbol) {
         globalCell.value = `${playerSymbol}`;
-        return true;
+        return;
       }
       else if (!globalCell.localCells.includes('')) {
-        globalCell.value = '-';
-        return true;
+        globalCell.value = '½';
+        return;
       }
     }
-    return false;
+    return
   }
 }
 

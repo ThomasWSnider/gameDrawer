@@ -24,6 +24,7 @@ const board = computed(() => Appstate.ultimateTTT.board)
       <div class="rounded-pill"></div>
     </div>
   </section>
+
 </template>
 
 

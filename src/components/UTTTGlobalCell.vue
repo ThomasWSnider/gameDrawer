@@ -14,6 +14,7 @@ const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
 // const boardSettled = ref(false)
 // const cellReset = ref(false)
 
+
 function fillLocalCell(index: number) {
   uTTTService.fillCell(props.globalCellIndex, index);
   console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`);
