@@ -1,4 +1,3 @@
-import { Value } from "sass";
 import { Appstate } from "../Appstate";
 
 class UTTTService {
@@ -20,16 +19,12 @@ class UTTTService {
         if (globalWinner) {
           return Appstate.ultimateTTT.currentPlayer ? 2 : 1;
         }
-        else {
-          this.setActiveGlobalCell(localCellIndex);
-          this.switchPlayer();
-          return 0
-        }
       }
       this.setActiveGlobalCell(localCellIndex);
       this.switchPlayer();
+      return 0;
     }
-    return;
+    return 0;
   }
 
   setActiveGlobalCell(index: number) {
@@ -49,12 +44,12 @@ class UTTTService {
 
   checkForLocalWinner(globalCellIndex: number) {
     const globalCell = Appstate.ultimateTTT.board.globalCells[globalCellIndex];
-    const winStates = Appstate.ticTacToeWinStates;
+    const winStates = Appstate.threeInARowWinStates;
     const playerSymbol = Appstate.ultimateTTT.players[Number(Appstate.ultimateTTT.currentPlayer)];
     for (const combination of winStates) {
       const [a, b, c] = combination;
       if (globalCell.localCells[a] === playerSymbol && globalCell.localCells[b] === playerSymbol && globalCell.localCells[c] === playerSymbol) {
-        globalCell.value = `${playerSymbol}`;
+        globalCell.value = playerSymbol as "X" | "O";
         return true;
       }
       else if (!globalCell.localCells.includes('')) {
@@ -66,7 +61,7 @@ class UTTTService {
   }
 
   checkForGlobalWinner() {
-    const winStates = Appstate.ticTacToeWinStates;
+    const winStates = Appstate.threeInARowWinStates;
     const globalBoard = Appstate.ultimateTTT.board.globalCells;
     const playerSymbol = Appstate.ultimateTTT.players[Number(Appstate.ultimateTTT.currentPlayer)];
     for (const combination of winStates) {

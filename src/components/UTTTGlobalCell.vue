@@ -20,7 +20,7 @@ function fillLocalCell(localCellIndex: number) {
     return;
   }
   if (localBoard.value[localCellIndex] === "") {
-    uTTTService.fillCell(props.globalCellIndex, localCellIndex);
+    const gameResult = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
   }
 
 }

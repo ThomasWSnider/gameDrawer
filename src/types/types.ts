@@ -1,23 +1,21 @@
 import type { GlobalCell } from "../models/GlobalCell";
 
-
-export interface ticTacToe {
-  board: { cells: string[] };
-  players: string[];
+export interface ITwoPlayerGame<T> {
+  board: T;
+  players: [string, string];
   currentPlayer: boolean;
   gameStates: string[];
 }
 
-export interface ultimateTTT {
-  board: { globalCells: GlobalCell[] };
-  activeGlobalCell: number | null;
-  players: ('X' | 'O')[];
-  currentPlayer: boolean;
-  gameStates: string[];
+export interface ticTacToe extends ITwoPlayerGame<string[]> { }
+
+export interface ultimateTTT extends ITwoPlayerGame<{ globalCells: GlobalCell[] }> {
+  activeGlobalCell: null | number;
 }
 
 export interface AppState {
-  ticTacToeWinStates: number[][];
+  threeInARowWinStates: number[][];
   ticTacToe: ticTacToe;
   ultimateTTT: ultimateTTT;
+  currentGame: ticTacToe | ultimateTTT | null;
 }

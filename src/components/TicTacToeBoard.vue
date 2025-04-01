@@ -17,7 +17,7 @@ function fillCell(cellIndex: number) {
   if (currentGameState.value != 0) {
     return;
   }
-  if (board.value.cells[cellIndex] === "") {
+  if (board.value[cellIndex] === "") {
     const winnerIs = ticTacToeService.fillCell(cellIndex, playerSymbol.value)
     if (winnerIs) {
       if (currentPlayer.value) {
@@ -29,7 +29,7 @@ function fillCell(cellIndex: number) {
         return
       }
     }
-    if (!winnerIs && !board.value.cells.includes("")) {
+    if (!winnerIs && !board.value.includes("")) {
       currentGameState.value = 3;
     }
     else {
@@ -55,7 +55,7 @@ function resetGame() {
 
 <template>
   <section class="board">
-    <div @click="fillCell(index)" v-for="(cell, index) in board.cells" :key="index" class="cell">
+    <div @click="fillCell(index)" v-for="(cell, index) in board" :key="index" class="cell">
       <div class="cell-indicator d-flex justify-content-center align-items-center">
         <p class="display-2 text-light" :class="{ 'd-none': cell != '' }">{{ playerSymbol
         }}

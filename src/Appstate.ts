@@ -1,9 +1,11 @@
 import { reactive } from "vue";
 import { GlobalCell } from "./models/GlobalCell";
 import type { AppState } from "./types/types";
+import { TicTacToe } from "./models/TicTacToe";
+import { UltimateTicTacToe } from "./models/UltimateTicTacToe";
 
 export const Appstate = reactive<AppState>({
-  ticTacToeWinStates: [
+  threeInARowWinStates: [
     // Horizontal winstates
     [0, 1, 2],
     [3, 4, 5],
@@ -16,17 +18,7 @@ export const Appstate = reactive<AppState>({
     [0, 4, 8],
     [2, 4, 6]
   ],
-  ticTacToe: {
-    board: { cells: Array(9).fill("") as string[] },
-    players: ["X", "O"],
-    currentPlayer: false,
-    gameStates: [`inProgress`, `X Wins!`, `O Wins!`, `It's a Draw!`]
-  },
-  ultimateTTT: {
-    board: { globalCells: Array(9).fill(null).map(() => new GlobalCell) },
-    activeGlobalCell: null,
-    players: ["X", "O"],
-    currentPlayer: false,
-    gameStates: [`inProgress`, `X Wins!`, `O Wins!`, `It's a Draw!`]
-  }
+  ticTacToe: new TicTacToe(["X", "O"], Array(9).fill("")),
+  ultimateTTT: new UltimateTicTacToe(["X", "O"], { globalCells: Array(9).fill(null).map(() => new GlobalCell) }),
+  currentGame: null,
 })
