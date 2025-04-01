@@ -6,19 +6,23 @@ import { uTTTService } from "../services/UTTTService";
 
 
 const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number }>();
-// const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
+const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
 const globalBoard = computed(() => Appstate.ultimateTTT.board);
 const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
 // const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(Appstate.ultimateTTT.currentPlayer)])
-// const currentGameState = ref(0)
+const currentGameState = ref(0)
 // const boardSettled = ref(false)
 // const cellReset = ref(false)
 
 
-function fillLocalCell(index: number) {
-  uTTTService.fillCell(props.globalCellIndex, index);
-  console.log(`You clicked on local cell ${index + 1} on global cell ${props.globalCellIndex + 1}`);
-  return;
+function fillLocalCell(localCellIndex: number) {
+  if (currentGameState.value != 0) {
+    return;
+  }
+  if (localBoard.value[localCellIndex] === "") {
+    uTTTService.fillCell(props.globalCellIndex, localCellIndex);
+  }
+
 }
 
 </script>

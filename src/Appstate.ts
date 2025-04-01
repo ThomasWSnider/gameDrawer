@@ -27,6 +27,6 @@ export const Appstate = reactive<AppState>({
     activeGlobalCell: null,
     players: ["X", "O"],
     currentPlayer: false,
-    gameStates: [`newGame`, `X Wins!`, `O Wins!`, `It's a Draw!`]
+    gameStates: [`inProgress`, `X Wins!`, `O Wins!`, `It's a Draw!`]
   }
 })
