@@ -21,6 +21,8 @@ function fillLocalCell(localCellIndex: number) {
   }
   if (localBoard.value[localCellIndex] === "") {
     const gameResult = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
+    currentGameState.value = gameResult;
+    
   }
 
 }
