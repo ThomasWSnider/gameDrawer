@@ -20,9 +20,12 @@ function fillLocalCell(localCellIndex: number) {
     return;
   }
   if (localBoard.value[localCellIndex] === "") {
-    const gameResult = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
-    currentGameState.value = gameResult;
-    
+    const cellFilled = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
+    if (!cellFilled) return;
+    console.log('setting active global cell')
+    uTTTService.setActiveGlobalCell(localCellIndex);
+    uTTTService.switchPlayer();
+    // currentGameState.value = gameResult;
   }
 
 }

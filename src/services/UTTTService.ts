@@ -10,21 +10,21 @@ class UTTTService {
     if (board.globalCells[globalCellIndex].localCells[localCellIndex] === '' && (activeGlobalCell === globalCellIndex || activeGlobalCell === null) && board.globalCells[globalCellIndex].value === '') {
       // set the value to the same value as the current player
       board.globalCells[globalCellIndex].localCells[localCellIndex] = playerSymbol;
-      const localWinner = this.checkForLocalWinner(globalCellIndex);
-      if (localWinner) {
-        const globalWinner = this.checkForGlobalWinner();
-        if (globalWinner && board.globalCells.every((globalCell) => globalCell.value !== "")) {
-          return 3;
-        }
-        if (globalWinner) {
-          return Appstate.ultimateTTT.currentPlayer ? 2 : 1;
-        }
-      }
-      this.setActiveGlobalCell(localCellIndex);
-      this.switchPlayer();
-      return 0;
+      // const localWinner = this.checkForLocalWinner(globalCellIndex);
+      // if (localWinner) {
+      //   const globalWinner = this.checkForGlobalWinner();
+      //   if (globalWinner && board.globalCells.every((globalCell) => globalCell.value !== "")) {
+      //     return 3;
+      //   }
+      //   if (globalWinner) {
+      //     return Appstate.ultimateTTT.currentPlayer ? 2 : 1;
+      //   }
+      // }
+      // this.setActiveGlobalCell(localCellIndex);
+      // this.switchPlayer();
+      return true;
     }
-    return 0;
+    return false;
   }
 
   setActiveGlobalCell(index: number) {
