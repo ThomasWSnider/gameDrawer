@@ -22,14 +22,21 @@ function fillLocalCell(localCellIndex: number) {
   if (localBoard.value[localCellIndex] === "") {
     const cellFilled = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
     if (!cellFilled) return;
-    console.log('setting active global cell')
+    const localWinner = uTTTService.checkForLocalWinner(props.globalCellIndex);
+    if (localWinner) {
+      const globalWinner = uTTTService.checkForGlobalWinner();
+      if (globalWinner && globalBoard.value.globalCells.every((globalCell) => globalCell.value !== "")) {
+        currentGameState.value = 3;
+      }
+      if (globalWinner) {
+        currentGameState.value = Appstate.ultimateTTT.currentPlayer ? 2 : 1;
+      }
+    }
     uTTTService.setActiveGlobalCell(localCellIndex);
     uTTTService.switchPlayer();
-    // currentGameState.value = gameResult;
   }
 
 }
-
 </script>
 
 
