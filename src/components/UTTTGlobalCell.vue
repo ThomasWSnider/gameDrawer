@@ -5,7 +5,7 @@ import { Appstate } from "../Appstate";
 import { uTTTService } from "../services/UTTTService";
 
 
-const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number, currentGameState: number, activeGlobalCell: number | null }>();
+const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number, currentGameState: number, activeGlobalCell: number | null, boardSettled: boolean, localCellReset: boolean }>();
 const globalBoard = computed(() => Appstate.ultimateTTT.board);
 const emit = defineEmits(['moveMade'])
 
@@ -26,14 +26,15 @@ function handleMove(localCellIndex: number) {
   <section class="global-cell">
 
     <div class="d-flex justify-content-center align-items-center global-cell-indicator">
-      <p class="fw-semibold" :class="{ 'd-none': globalBoard.globalCells[props.globalCellIndex].value == '' }">{{
+      <p class="fw-semibold" :class="{ 'd-none': globalBoard.globalCells[props.globalCellIndex].value === '' }">{{
         globalBoard.globalCells[props.globalCellIndex].value }}</p>
     </div>
     <div class="local-board"
-      :class="{ 'invalid-cell': (activeGlobalCell !== null && globalCellIndex !== activeGlobalCell) || globalBoard.globalCells[globalCellIndex].value !== '' }">
+      :class="{ 'invalid-cell': (activeGlobalCell !== null && globalCellIndex !== activeGlobalCell) || globalBoard.globalCells[props.globalCellIndex].value !== '' }">
 
       <div @click="handleMove(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
-        class="local-cell d-flex justify-content-center align-items-center">
+        class="local-cell d-flex justify-content-center align-items-center"
+        :class="{ 'filled-in': cell != '' && localCellReset === false }">
         <p class="m-0 text-center fs-2">{{ cell }}</p>
       </div>
 
@@ -65,7 +66,6 @@ function handleMove(localCellIndex: number) {
   height: 100%;
   width: 100%;
   opacity: 1;
-  z-index: 3;
 
   p {
     font-size: 9.75rem;
@@ -75,6 +75,14 @@ function handleMove(localCellIndex: number) {
 .local-cell {
   pointer-events: auto;
   cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  opacity: 0.2;
+  transition: opacity .33s ease-in;
+
+  &.filled-in {
+    opacity: 1;
+  }
 }
 
 .local-board {
@@ -86,6 +94,8 @@ function handleMove(localCellIndex: number) {
   grid-template-rows: repeat(3, 1fr);
   pointer-events: none;
   user-select: none;
+  opacity: 1;
+  transition: opacity .33s ease-in;
 
 
   &.invalid-cell {

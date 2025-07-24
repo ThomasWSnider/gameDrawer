@@ -9,7 +9,7 @@ export abstract class TwoPlayerGame<T> implements ITwoPlayerGame<T> {
   constructor(players: [string, string], board: T) {
     this.players = players;
     this.currentPlayer = false;
-    this.gameStates = [`inProgress`, `${players[0]} Wins!`, `${players[1]} Wins!`];
+    this.gameStates = [`inProgress`, `${players[0]} Wins!`, `${players[1]} Wins!`, `Tied Game!`];
     this.board = board
   }
 }

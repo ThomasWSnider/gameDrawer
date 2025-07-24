@@ -8,7 +8,7 @@ const currentGameResult = Appstate.currentGame?.gameStates[props.gameResult];
 
 
 <template>
-  <section>
+  <section class="overlay">
     <div class="banner-filter"></div>
     <div class="game-title text-center d-flex flex-column justify-content-between">
       <p class="display-3 fw-bold">{{ currentGameResult }}</p>
@@ -20,8 +20,8 @@ const currentGameResult = Appstate.currentGame?.gameStates[props.gameResult];
 
 
 <style lang="scss" scoped>
-section {
-  position: absolute;
+.overlay {
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -36,6 +36,7 @@ section {
     z-index: 2;
   }
 }
+
 
 .game-title {
   position: relative;

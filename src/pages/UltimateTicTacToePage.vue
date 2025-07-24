@@ -2,13 +2,8 @@
 import { computed, onMounted } from "vue";
 import UTTTBoard from "../components/UTTTBoard.vue";
 import { Appstate } from "../Appstate";
-import { gameService } from "../services/GameService";
 
 const currentPlayer = computed(() => Appstate.ultimateTTT.currentPlayer)
-
-onMounted(() => {
-  gameService.startUltimateTTT(["X", "O"]);
-})
 
 </script>
 
