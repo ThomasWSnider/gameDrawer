@@ -1,14 +1,15 @@
 <script setup>
-import { computed, onUnmounted } from "vue";
+import { computed, onMounted } from "vue";
 import GameStartEndOverlay from "../components/GameStartEndOverlay.vue";
 import TicTacToeBoard from "../components/TicTacToeBoard.vue";
 import { Appstate } from "../Appstate";
 import { ticTacToeService } from "../services/TicTacToeService";
+import { gameService } from "../services/GameService";
 
 const currentPlayer = computed(() => Appstate.ticTacToe.currentPlayer)
 
-onUnmounted(() => {
-  ticTacToeService.resetGame()
+onMounted(() => {
+  gameService.startTicTacToe(["X", "O"]);
 })
 
 </script>

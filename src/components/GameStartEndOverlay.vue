@@ -1,10 +1,8 @@
-<script setup>
-import { computed } from "vue";
+<script setup lang="ts">
 import { Appstate } from "../Appstate";
-import { ticTacToeService } from "../services/TicTacToeService";
 
-const props = defineProps({ gameName: string, gameResult: number })
-const gameResult = computed(() => Appstate.ticTacToe.gameStates[props.gameResult])
+const props = defineProps<{ gameName: string, gameResult: number }>();
+const currentGameResult = Appstate.currentGame?.gameStates[props.gameResult];
 
 </script>
 
@@ -13,7 +11,7 @@ const gameResult = computed(() => Appstate.ticTacToe.gameStates[props.gameResult
   <section>
     <div class="banner-filter"></div>
     <div class="game-title text-center d-flex flex-column justify-content-between">
-      <p class="display-3 fw-bold">{{ gameResult }}</p>
+      <p class="display-3 fw-bold">{{ currentGameResult }}</p>
       <div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { Appstate } from "../Appstate";
+import { TicTacToe } from "../models/TicTacToe";
 
 class TicTacToeService {
 
@@ -21,9 +22,12 @@ class TicTacToeService {
     }
   }
 
-  resetGame() {
-    Appstate.ticTacToe.board = Array(9).fill("") as string[]
-    Appstate.ticTacToe.currentPlayer = false
+  start(players: [string, string]) {
+    // Appstate.ticTacToe.board = Array(9).fill("") as string[]
+    // Appstate.ticTacToe.currentPlayer = false
+    const game = new TicTacToe(players, Array(9).fill(""));
+    Appstate.ticTacToe = game;
+    Appstate.currentGame = game;
   }
 
   switchPlayer() {

@@ -45,7 +45,7 @@ function resetGame() {
   currentGameState.value = 0;
   setTimeout(() => {
     cellReset.value = false
-    ticTacToeService.resetGame()
+    ticTacToeService.start(["X", "O"])
     boardSettled.value = false;
   }, 333)
 }

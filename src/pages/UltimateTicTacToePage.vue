@@ -7,7 +7,7 @@ import { gameService } from "../services/GameService";
 const currentPlayer = computed(() => Appstate.ultimateTTT.currentPlayer)
 
 onMounted(() => {
-  gameService.startUltimateTTT(["X", "O"])
+  gameService.startUltimateTTT(["X", "O"]);
 })
 
 </script>
