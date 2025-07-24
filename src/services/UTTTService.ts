@@ -1,18 +1,14 @@
 import { Appstate } from "../Appstate";
+import type { GlobalCell } from "../models/GlobalCell";
 
 class UTTTService {
 
   fillCell(globalCellIndex: number, localCellIndex: number) {
-    const board = Appstate.ultimateTTT.board
-    const activeGlobalCell = Appstate.ultimateTTT.activeGlobalCell
+    const board = Appstate.ultimateTTT.board;
+    const localBoard = board.globalCells[globalCellIndex]
     const playerSymbol = Appstate.ultimateTTT.players[Number(Appstate.ultimateTTT.currentPlayer)];
-    // if cell is empty and in correct global cell
-    if (board.globalCells[globalCellIndex].localCells[localCellIndex] === '' && (activeGlobalCell === globalCellIndex || activeGlobalCell === null) && board.globalCells[globalCellIndex].value === '') {
-      // set the value to the same value as the current player
-      board.globalCells[globalCellIndex].localCells[localCellIndex] = playerSymbol;
-      return true;
-    }
-    return false;
+    // set the value to the same value as the current player
+    localBoard.localCells[localCellIndex] = playerSymbol;
   }
 
   setActiveGlobalCell(index: number) {
@@ -59,6 +55,17 @@ class UTTTService {
         return false;
       }
     }
+  }
+
+  validateMove(currentGameState: number, globalCellIndex: number, localCellIndex: number) {
+    const board = Appstate.ultimateTTT.board;
+    const localBoard = board.globalCells[globalCellIndex];
+    const activeGlobalCell = Appstate.ultimateTTT.activeGlobalCell;
+    if (currentGameState !== 0) return false;
+    if (activeGlobalCell !== null && activeGlobalCell !== globalCellIndex) return false;
+    if (localBoard.value !== '') return false;
+    if (localBoard.localCells[localCellIndex] !== '') return false;
+    return true;
   }
 }
 

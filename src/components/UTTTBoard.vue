@@ -1,10 +1,27 @@
-<script setup>
-import { computed } from "vue";
+<script setup lang="ts">
+import { computed, ref } from "vue";
 import { Appstate } from "../Appstate";
 import UTTTGlobalCell from "./UTTTGlobalCell.vue";
+import { uTTTService } from "../services/UTTTService";
 
 
-const board = computed(() => Appstate.ultimateTTT.board)
+const board = computed(() => Appstate.ultimateTTT.board);
+const currentGameState = ref(0);
+const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
+
+
+function handleMove(globalCellIndex: number) {
+  const localWinner = uTTTService.checkForLocalWinner(globalCellIndex);
+  if (localWinner) {
+    const globalWinner = uTTTService.checkForGlobalWinner();
+    if (globalWinner && board.value.globalCells.every((globalCell) => globalCell.value !== "")) {
+      currentGameState.value = 3;
+    }
+    if (globalWinner) {
+      currentGameState.value = Appstate.ultimateTTT.currentPlayer ? 2 : 1;
+    }
+  }
+}
 
 </script>
 
@@ -13,7 +30,8 @@ const board = computed(() => Appstate.ultimateTTT.board)
   <section class="board">
     <div v-for="(globalCell, index) in board.globalCells" :key="index"
       class="d-flex justify-content-center align-items-center">
-      <UTTTGlobalCell :globalCell="globalCell" :globalCellIndex="index" />
+      <UTTTGlobalCell @moveMade="() => handleMove(index)" :globalCell="globalCell" :globalCellIndex="index"
+        :currentGameState="currentGameState" :activeGlobalCell="activeGlobalCell" />
     </div>
     <div class="vertical-lines justify-content-evenly">
       <div class="rounded-pill"></div>

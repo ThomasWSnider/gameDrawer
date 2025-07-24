@@ -1,41 +1,23 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed } from "vue";
 import { GlobalCell } from "../models/GlobalCell";
 import { Appstate } from "../Appstate";
 import { uTTTService } from "../services/UTTTService";
 
 
-const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number }>();
-const localBoard = computed(() => Appstate.ultimateTTT.board.globalCells[props.globalCellIndex].localCells);
+const props = defineProps<{ globalCell: GlobalCell, globalCellIndex: number, currentGameState: number, activeGlobalCell: number | null }>();
 const globalBoard = computed(() => Appstate.ultimateTTT.board);
-const activeGlobalCell = computed(() => Appstate.ultimateTTT.activeGlobalCell);
-// const playerSymbol = computed(() => Appstate.ticTacToe.players[Number(Appstate.ultimateTTT.currentPlayer)])
-const currentGameState = ref(0)
-// const boardSettled = ref(false)
-// const cellReset = ref(false)
+const emit = defineEmits(['moveMade'])
 
-
-function fillLocalCell(localCellIndex: number) {
-  if (currentGameState.value != 0) {
-    return;
-  }
-  if (localBoard.value[localCellIndex] === "") {
-    const cellFilled = uTTTService.fillCell(props.globalCellIndex, localCellIndex);
-    if (!cellFilled) return;
-    const localWinner = uTTTService.checkForLocalWinner(props.globalCellIndex);
-    if (localWinner) {
-      const globalWinner = uTTTService.checkForGlobalWinner();
-      if (globalWinner && globalBoard.value.globalCells.every((globalCell) => globalCell.value !== "")) {
-        currentGameState.value = 3;
-      }
-      if (globalWinner) {
-        currentGameState.value = Appstate.ultimateTTT.currentPlayer ? 2 : 1;
-      }
-    }
+function handleMove(localCellIndex: number) {
+  const moveIsValid = uTTTService.validateMove(props.currentGameState, props.globalCellIndex, localCellIndex);
+  if (moveIsValid) {
+    uTTTService.fillCell(props.globalCellIndex, localCellIndex);
+    emit('moveMade')
     uTTTService.setActiveGlobalCell(localCellIndex);
     uTTTService.switchPlayer();
   }
-
+  return;
 }
 </script>
 
@@ -48,9 +30,9 @@ function fillLocalCell(localCellIndex: number) {
         globalBoard.globalCells[props.globalCellIndex].value }}</p>
     </div>
     <div class="local-board"
-      :class="{ 'invalid-cell': (globalCellIndex != activeGlobalCell && activeGlobalCell !== null) || globalBoard.globalCells[globalCellIndex].value !== '' }">
+      :class="{ 'invalid-cell': (activeGlobalCell !== null && globalCellIndex !== activeGlobalCell) || globalBoard.globalCells[globalCellIndex].value !== '' }">
 
-      <div @click="fillLocalCell(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
+      <div @click="handleMove(index)" v-for="(cell, index) in globalCell?.localCells" :key="index"
         class="local-cell d-flex justify-content-center align-items-center">
         <p class="m-0 text-center fs-2">{{ cell }}</p>
       </div>
