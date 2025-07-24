@@ -5,7 +5,7 @@ import { ticTacToeService } from "../services/TicTacToeService";
 
 
 onMounted(() => {
-  if (Appstate.ticTacToe.board.cells != Array(9).fill("")) ticTacToeService.resetGame()
+  if (Appstate.ticTacToe.board != Array(9).fill("")) ticTacToeService.resetGame()
 })
 
 

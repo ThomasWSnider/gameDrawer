@@ -1,7 +1,14 @@
 import { Appstate } from "../Appstate";
-import type { GlobalCell } from "../models/GlobalCell";
+import { GlobalCell } from "../models/GlobalCell";
+import { UltimateTicTacToe } from "../models/UltimateTicTacToe";
 
 class UTTTService {
+
+  start(players: [string, string]) {
+    const game = new UltimateTicTacToe(players, { globalCells: Array(9).fill(null).map(() => new GlobalCell) });
+    Appstate.ultimateTTT = game;
+    Appstate.currentGame = game;
+  }
 
   fillCell(globalCellIndex: number, localCellIndex: number) {
     const board = Appstate.ultimateTTT.board;

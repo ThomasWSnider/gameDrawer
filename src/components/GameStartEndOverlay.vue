@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { Appstate } from "../Appstate";
 import { ticTacToeService } from "../services/TicTacToeService";
 
-const props = defineProps({ gameName: String, gameResult: Number })
+const props = defineProps({ gameName: string, gameResult: number })
 const gameResult = computed(() => Appstate.ticTacToe.gameStates[props.gameResult])
 
 </script>
